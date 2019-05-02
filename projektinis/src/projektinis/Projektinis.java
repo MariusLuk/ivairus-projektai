@@ -29,6 +29,7 @@ public class Projektinis {
 			} else {
 				System.out.println("Nekorektiska ivestis! Pakartokite dar karta.");
 			}
+			
 			scanner.nextLine();
 		} while (!ivestisTinkama);
 		System.out.println();
