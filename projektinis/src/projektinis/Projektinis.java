@@ -29,7 +29,7 @@ public class Projektinis {
 			} else {
 				System.out.println("Nekorektiska ivestis! Pakartokite dar karta.");
 			}
-			
+
 			scanner.nextLine();
 		} while (!ivestisTinkama);
 		System.out.println();
@@ -304,7 +304,7 @@ public class Projektinis {
 
 	public static void uzsakymasToAtaskaita(int pirkejoID, String pirkejoPavadinimas, String pirkejoEmail,
 			String pirkejoAdresas, double krepselioKaina) {
-		String url = "jdbc:sqlite:C:/users/T420s/desktop/uzsakymuAtaskaita.db";
+		String url = "jdbc:sqlite:C:\\git\\source\\projects-to-git\\projektinis\\uzsakymuAtaskaita.db";
 		String sql = "INSERT INTO uzsakymai(pirkejoID,pirkejoPavadinimas,pirkejoEmail,pirkejoAdresas,krepselioKaina) VALUES(?,?,?,?,?)";
 
 		try (Connection conn = DriverManager.getConnection(url); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -500,7 +500,7 @@ public class Projektinis {
 	}
 
 	public static void rodykUzsakymuAtaskaita() {
-		String url = "jdbc:sqlite:C:/users/T420s/desktop/uzsakymuAtaskaita.db";
+		String url = "jdbc:sqlite:C:\\git\\source\\projects-to-git\\projektinis\\uzsakymuAtaskaita.db";
 		String sql = "SELECT pirkejoID, pirkejoPavadinimas, pirkejoEmail, pirkejoAdresas, krepselioKaina, uzsakymoDataLaikas FROM uzsakymai";
 
 		try (Connection conn = DriverManager.getConnection(url);
