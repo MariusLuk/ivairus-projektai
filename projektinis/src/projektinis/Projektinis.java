@@ -113,7 +113,6 @@ public class Projektinis {
     }
 
     public static void pradzia() {
-
         System.out.println("Sveiki atvyke i e-parduotuve!");
         System.out.println();
         System.out.println("Jei esate pirkejas - spauskite 1");
@@ -164,7 +163,6 @@ public class Projektinis {
                 System.out.println("Nekorektiska ivestis!");
                 pirkejoMeniu1();
         }
-
     }
 
     public static void pirkejoMeniu11() {
@@ -280,7 +278,6 @@ public class Projektinis {
                     pirkejoMeniu121();
             }
         }
-
     }
 
     public static void nuskaitykPirkejoRekvizitus() {
@@ -380,7 +377,7 @@ public class Projektinis {
     }
 
     public static void tikrinkAdminPassword() {
-        String adminPassword = "4567";
+        String adminPassword = "1234";
         String ivestasPassword = null;
         int blogoPasswordSkaitliukas = 0;
 
@@ -403,7 +400,6 @@ public class Projektinis {
             adminMeniu2();
         }
     }
-
 
     public static void adminMeniu2() {
 
