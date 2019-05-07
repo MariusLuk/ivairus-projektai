@@ -1,10 +1,6 @@
 package projektinis;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class Sandelis {
@@ -22,6 +18,8 @@ public class Sandelis {
         String url = "jdbc:sqlite:C:\\git\\source\\projects-to-git\\projektinis\\projektinioDuomenuBaze.db";
         String sql = "SELECT * FROM sandelis";
 
+        String s = "          ";
+
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -30,7 +28,13 @@ public class Sandelis {
             System.out.println("PrekesId     Pavadinimas     Kiekis     Svoris     Didmenine kaina     Mazmenine kaina");
             System.out.println("______________________________________________________________________________________");
             while (rs.next()) {
-                System.out.println(rs.getInt("PrekesID") + "\t     " + rs.getString("Pavadinimas")
+
+                String pavadinimas = rs.getString("Pavadinimas");
+
+                pavadinimas = pavadinimas + s.substring(pavadinimas.length()+1);
+
+
+                System.out.println(rs.getInt("PrekesID") + "\t     " + pavadinimas
                         + "\t      " + rs.getInt("Kiekis") + "\t     " + rs.getDouble("Svoris")
                         + "\t        " + rs.getDouble("DidmenineKaina") + "\t              " + rs.getDouble("MazmenineKaina"));
             }
@@ -91,5 +95,56 @@ public class Sandelis {
             }
         }
         System.out.println();
+    }
+
+    public static Preke ieskotiPrekesPagalID(int prekesID) {
+        String url = "jdbc:sqlite:C:\\git\\source\\projects-to-git\\projektinis\\projektinioDuomenuBaze.db";
+        String sql = "SELECT * FROM sandelis WHERE PrekesID = ?";
+
+        Preke rastaPreke = new Preke();
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, prekesID);
+            ResultSet rs = stmt.executeQuery();
+
+            System.out.println("nuskaitymas ivyko");
+
+
+             if (rs.next()) {
+                rastaPreke.ID = rs.getInt("PrekesID");
+                rastaPreke.pavadinimas = rs.getString("Pavadinimas");
+                rastaPreke.kiekis = rs.getInt("Kiekis");
+                rastaPreke.svoris = rs.getDouble("Svoris");
+                rastaPreke.didmKaina = rs.getDouble("DidmenineKaina");
+                rastaPreke.mazKaina = rs.getDouble("MazmenineKaina");
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return rastaPreke;
+    }
+
+    public static void keistiPrekesKiekiDB(int id, int kiekis) {
+        String url = "jdbc:sqlite:C:\\git\\source\\projects-to-git\\projektinis\\projektinioDuomenuBaze.db";
+        String sql = "UPDATE sandelis SET kiekis = ? " + " WHERE PrekesId = ?";
+
+        try (Connection conn = DriverManager.getConnection(url); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, kiekis);
+            pstmt.setInt(2, id);
+
+            pstmt.executeUpdate();
+
+            System.out.println("Kiekis atnaujintas");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+
     }
 }

@@ -26,7 +26,7 @@ public class Preke {
 		}
 		if (arYraSandely) {
 			System.out.println("Preke su tokiu ID jau yra sandelyje! Galite tiesiog keisti jos kieki.");
-			Projektinis.adminMeniu2111(ID);
+			// Projektinis.adminMeniu2111(ID);
 		} else {
 			System.out.println("Iveskite naujos prekes pavadinima:");
 			String pavadinimas = scanner.nextLine();
@@ -74,10 +74,11 @@ public class Preke {
 
 	}
 
-	public static void keiskPrekesKiekiSandely(int prekesID) {
+	public static void keiskPrekesKiekiSandely(Preke keiciamaPreke) {
 		System.out.println("Iveskite norima prekes kiekio korekcija (+/-)");
 		int ivestaKiekioKorekcija = Projektinis.kiekioNuskaitymas();
-		for (Preke p : Sandelis.prekes) {
+
+		/*for (Preke p : Sandelis.prekes) {
 			if (p.ID == prekesID) {
 				if (ivestaKiekioKorekcija * p.didmKaina > PiniguLikutis.getKiekis()) {
 					System.out.println("Nepakankamas pinigu likutis parduotuveje!");
@@ -95,7 +96,13 @@ public class Preke {
 
 				}
 			}
-		}
+		}*/
+
+
+		keiciamaPreke.kiekis += ivestaKiekioKorekcija;
+
+		Sandelis.keistiPrekesKiekiDB(keiciamaPreke.ID, keiciamaPreke.kiekis);
+
 	}
 
 	public static void keiskPrekesKiekiKrepselyje(int prekesID) {

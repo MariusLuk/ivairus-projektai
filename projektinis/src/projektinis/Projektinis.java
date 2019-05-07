@@ -381,21 +381,22 @@ public class Projektinis {
         String ivestasPassword = null;
         int blogoPasswordSkaitliukas = 0;
 
-        while (((ivestasPassword == null) || (!ivestasPassword.contains(adminPassword))) && blogoPasswordSkaitliukas < 3) {
+        while (!adminPassword.equals(ivestasPassword) && blogoPasswordSkaitliukas < 3) {
             System.out.println("Iveskite slaptazodi, noredami prisijungti prie ADMINISTRATORIAUS MENIU:");
             ivestasPassword = scanner.nextLine();
-            if (!ivestasPassword.contains(adminPassword)) {
+            if (!adminPassword.equals(ivestasPassword)) {
                 blogoPasswordSkaitliukas = blogoPasswordSkaitliukas + 1;
                 System.out.println("Slaptazodis nekorektiskas!");
                 System.out.println();
             }
         }
+
         if (blogoPasswordSkaitliukas == 3) {
             System.out.println(blogoPasswordSkaitliukas + " kartus ivedete nekorektiska slaptazodi!");
             System.exit(0);
         }
 
-        if (adminPassword.contains(ivestasPassword)) {
+        if (adminPassword.equals(ivestasPassword)) {
             System.out.println();
             adminMeniu2();
         }
@@ -459,25 +460,27 @@ public class Projektinis {
         Sandelis.sandelioSpausdinimasAdminui();
         System.out.println("Iveskite prekes ID");
         int prekesID = teigSkaiciausNuskaitymas();
-        boolean arYraSandely = false;
+//        boolean arYraSandely = false;
+        Preke rastaPreke = Sandelis.ieskotiPrekesPagalID(prekesID);
 
+        /*
         for (Preke p : Sandelis.prekes) {
             if (p.ID == prekesID) {
                 arYraSandely = true;
             }
-        }
-        if (arYraSandely) {
-            adminMeniu2111(prekesID);
+        }*/
+        if (rastaPreke.ID != 0) {
+            adminMeniu2111(prekesID, rastaPreke);
         } else {
             System.out.println("Toks ID nerastas!");
             adminMeniu21();
         }
     }
 
-    public static void adminMeniu2111(int prekesID) {
+    public static void adminMeniu2111(int prekesID, Preke keiciamaPreke) {
         Sandelis.sandelioPrekesSpausdinimasAdminui(prekesID);
         PiniguLikutis.spausdinkPiniguLikuti();
-        Preke.keiskPrekesKiekiSandely(prekesID);
+        Preke.keiskPrekesKiekiSandely(keiciamaPreke);
         adminMeniu21();
     }
 
