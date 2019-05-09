@@ -1,5 +1,7 @@
 package projektinis;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -34,6 +36,13 @@ public class Projektinis {
         } while (!ivestisTinkama);
         System.out.println();
         return pasirinkimas;
+    }
+
+
+    // Method for testing
+    public static void test(){
+        Sandelis.sandelioPrekesSpausdinimasAdminui(1234567);
+
     }
 
     public static int teigSkaiciausNuskaitymas() {
@@ -378,7 +387,8 @@ public class Projektinis {
 
     public static void tikrinkAdminPassword() {
         String adminPassword = "1234";
-        String ivestasPassword = null;
+//        String ivestasPassword = null;
+        String ivestasPassword = "1234";
         int blogoPasswordSkaitliukas = 0;
 
         while (!adminPassword.equals(ivestasPassword) && blogoPasswordSkaitliukas < 3) {
@@ -470,23 +480,33 @@ public class Projektinis {
             }
         }*/
         if (rastaPreke.ID != 0) {
-            adminMeniu2111(prekesID, rastaPreke);
+            adminMeniu2111(rastaPreke);
         } else {
             System.out.println("Toks ID nerastas!");
+            System.out.println();
             adminMeniu21();
         }
     }
 
-    public static void adminMeniu2111(int prekesID, Preke keiciamaPreke) {
-        Sandelis.sandelioPrekesSpausdinimasAdminui(prekesID);
+    public static void adminMeniu2111(Preke keiciamaPreke) {
+        //TODO
+        // Sandelis.sandelioPrekesSpausdinimasAdminui(prekesID);
+
+        // Spausdinti rasta preke
+        Sandelis.rastosPrekesSpausdinimasAdminui(keiciamaPreke);
+
         PiniguLikutis.spausdinkPiniguLikuti();
         Preke.keiskPrekesKiekiSandely(keiciamaPreke);
         adminMeniu21();
     }
 
+    // Papildyti sandeli
     public static void adminMeniu212() {
 
+        //1. Rodomas pinigu likuts
         PiniguLikutis.spausdinkPiniguLikuti();
+
+
         Preke.nuskaitykNaujaPrekeToSandelis();
         adminMeniu21();
     }
@@ -558,7 +578,7 @@ public class Projektinis {
     }
 
     public static void main(String[] args) {
-
+        // test();
         pradzia();
 
     }
