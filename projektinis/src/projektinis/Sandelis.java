@@ -4,31 +4,22 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Sandelis {
-    public static ArrayList<Preke> prekes = new ArrayList<>();
 
-    public static String url = "jdbc:sqlite:C:\\git\\source\\projects-to-git\\projektinis\\projektinioDuomenuBaze.db";
+    public static String url = "jdbc:sqlite:projektinioDuomenuBaze.db";
 
     public static void sandelioSpausdinimasAdminui() {
         System.out.println("Prekiu likuciai sandelyje siuo metu:");
 
-/*		for (Preke p : Sandelis.prekes) {
-			System.out.println(
-					"ID " + p.ID + " pavadinimas " + p.pavadinimas + " --- " + "kiekis " + p.kiekis + " vnt., svoris " + p.svoris
-							+ " kg, didmenine kaina " + p.didmKaina + " EUR, mazmenine kaina " + p.mazKaina + " EUR");
-		}*/
-
-
         String sql = "SELECT * FROM sandelis";
-
         String s = "               ";
 
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-            System.out.println("___________________________________________________________________________________________________");
-            System.out.println("PrekesId       Pavadinimas         Kiekis        Svoris       Didmenine kaina       Mazmenine kaina");
-            System.out.println("___________________________________________________________________________________________________");
+            System.out.println("_______________________________________________________________________________________________");
+            System.out.println("Prekes ID       Pavadinimas     Kiekis          Svoris        Didmenine kaina   Mazmenine kaina");
+            System.out.println("_______________________________________________________________________________________________");
             while (rs.next()) {
 
                 String prekesID = rs.getString("PrekesID");
@@ -51,7 +42,7 @@ public class Sandelis {
 
                 System.out.println(prekesID + "\t" + pavadinimas + "\t" + kiekis + "\t" + svoris + "\t" + didmenineKaina + "\t" + mazmenineKaina);
             }
-            System.out.println("___________________________________________________________________________________________________");
+            System.out.println("_______________________________________________________________________________________________");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -59,17 +50,9 @@ public class Sandelis {
     }
 
 
-
     public static void sandelioSpausdinimasPirkejui() {
         System.out.println("Prekiu likuciai sandelyje siuo metu:");
-
-//        for (Preke p : Sandelis.prekes) {
-//            System.out.println("ID " + p.ID + " pavadinimas " + p.pavadinimas + " --- " + "kiekis " + p.kiekis + " vnt., svoris "
-//                    + p.svoris + " kg, kaina " + p.mazKaina + " EUR");
-//        }
-
         String sql = "SELECT * FROM sandelis";
-
         String s = "               ";
 
         try (Connection conn = DriverManager.getConnection(url);
@@ -77,7 +60,7 @@ public class Sandelis {
              ResultSet rs = stmt.executeQuery(sql)) {
 
             System.out.println("_______________________________________________________________________________");
-            System.out.println("PrekesId       Pavadinimas         Kiekis        Svoris         Mazmenine kaina");
+            System.out.println("PrekesId       Pavadinimas     Kiekis          Svoris           Mazmenine kaina");
             System.out.println("_______________________________________________________________________________");
             while (rs.next()) {
 
@@ -91,12 +74,12 @@ public class Sandelis {
                 kiekis = kiekis + s.substring(kiekis.length() + 1);
 
                 String svoris = rs.getString("Svoris");
-                svoris = svoris + s.substring(kiekis.length() + 1);
+                svoris = svoris + s.substring(svoris.length() + 1);
 
                 String mazmenineKaina = rs.getString("MazmenineKaina");
-                mazmenineKaina = mazmenineKaina + s.substring(kiekis.length() + 1);
+                mazmenineKaina = mazmenineKaina + s.substring(mazmenineKaina.length() + 1);
 
-                System.out.println(prekesID + "\t" + pavadinimas + "\t\t" + kiekis + "\t" + svoris + "\t\t\t\t" + mazmenineKaina);
+                System.out.println(prekesID + "\t" + pavadinimas + "\t" + kiekis + "\t" + svoris + "\t" + mazmenineKaina);
             }
             System.out.println("_______________________________________________________________________________");
         } catch (SQLException e) {
@@ -108,13 +91,12 @@ public class Sandelis {
     public static void sandelioPrekesSpausdinimasPirkejui(int prekesID) {
         System.out.println();
 
-        for (Preke p : Sandelis.prekes) {
-            if (p.ID == prekesID) {
-                System.out.println(
-                        "Prekes ID " + p.ID + ", pavadinimas " + p.pavadinimas + ", likutis sandelyje siuo metu: " + p.kiekis);
-                System.out.println("Mazmenine kaina " + p.mazKaina + " EUR");
-            }
-        }
+        Preke p =  Sandelis.ieskotiSandelyjePrekesPagalID(prekesID);
+
+        System.out.println(
+                "Prekes ID " + p.ID + ", pavadinimas " + p.pavadinimas + ", likutis sandelyje siuo metu: " + p.kiekis);
+        System.out.println("Mazmenine kaina " + p.mazKaina + " EUR");
+
         System.out.println();
     }
 
@@ -122,52 +104,13 @@ public class Sandelis {
         System.out.println();
 
         for (Preke krepselioPreke : Krepselis.prekes) {
-            for (Preke sandelioPreke : Sandelis.prekes) {
-                if (krepselioPreke.ID == sandelioPreke.ID) {
-                    sandelioPreke.kiekis -= krepselioPreke.kiekis;
-//					System.out.println("Is sandelio isimta preke: " + sandelioPreke.pavadinimas + " kiekis: "
-//							+ sandelioPreke.kiekis);
-                }
-            }
+            mazintiPrekesKiekiSandelioDB(krepselioPreke.ID, krepselioPreke.kiekis);
         }
+
         System.out.println();
     }
 
-    public static void sandelioPrekesSpausdinimasAdminui(int prekesID) {
-        System.out.println();
-
-        String sql = "SELECT * FROM sandelis WHERE PrekesID = ?";
-
-        String s = "          ";
-
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, prekesID);
-
-            ResultSet rs = stmt.executeQuery();
-
-            System.out.println("______________________________________________________________________________________");
-            System.out.println("PrekesId     Pavadinimas     Kiekis     Svoris     Didmenine kaina     Mazmenine kaina");
-            System.out.println("______________________________________________________________________________________");
-            while (rs.next()) {
-
-                String pavadinimas = rs.getString("Pavadinimas");
-                pavadinimas = pavadinimas + s.substring(pavadinimas.length() + 1);
-
-                System.out.println(rs.getInt("PrekesID") + "\t     " + pavadinimas
-                        + "\t      " + rs.getInt("Kiekis") + "\t     " + rs.getDouble("Svoris")
-                        + "\t        " + rs.getDouble("DidmenineKaina") + "\t              " + rs.getDouble("MazmenineKaina"));
-            }
-            System.out.println("______________________________________________________________________________________");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        System.out.println();
-
-    }
-
-    public static Preke ieskotiPrekesPagalID(int prekesID) {
+    public static Preke ieskotiSandelyjePrekesPagalID(int prekesID) {
         String sql = "SELECT * FROM sandelis WHERE PrekesID = ?";
 
         Preke rastaPreke = new Preke();
@@ -189,21 +132,20 @@ public class Sandelis {
                 rastaPreke.mazKaina = rs.getDouble("MazmenineKaina");
             }
 
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return rastaPreke;
     }
 
-    public static void keistiPrekesKiekiDB(int id, int kiekis) {
+    public static void keistiPrekesKiekiSandelioDB(int id, int kiekis) {
         String sql = "UPDATE sandelis SET kiekis = ?" + "WHERE PrekesId = ?";
 
-        try (Connection conn = DriverManager.getConnection(url); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, kiekis);
             pstmt.setInt(2, id);
-
             pstmt.executeUpdate();
 
             System.out.println("Kiekis atnaujintas");
@@ -213,7 +155,24 @@ public class Sandelis {
         }
     }
 
-    public static void irasytiPrekeDB(Preke naujaPreke) {
+    public static void mazintiPrekesKiekiSandelioDB(int id, int kiekis) {
+        String sql = "UPDATE sandelis SET kiekis = kiekis - ?" + "WHERE PrekesId = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, kiekis);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+
+            System.out.println("Kiekis atnaujintas");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void irasytiPrekeToSandelioDB(Preke naujaPreke) {
 
         String sql = "INSERT INTO sandelis(PrekesID, Pavadinimas, Kiekis, Svoris, DidmenineKaina, MazmenineKaina) VALUES(?,?,?,?,?,?)";
 
@@ -228,25 +187,72 @@ public class Sandelis {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-
     }
 
 
     public static void rastosPrekesSpausdinimasAdminui(Preke keiciamaPreke) {
 
-        // TODO: sutvarkyti header
-        System.out.println("_______________________________________________________________________________");
-        System.out.println("PrekesId       Pavadinimas         Kiekis        Svoris         Mazmenine kaina");
-        System.out.println("_______________________________________________________________________________");
+        System.out.println("_______________________________________________________________________________________________");
+        System.out.println("Prekes ID       Pavadinimas     Kiekis          Svoris        Didmenine kaina   Mazmenine kaina");
+        System.out.println("_______________________________________________________________________________________________");
 
-        System.out.println(keiciamaPreke.ID + "\t     " + keiciamaPreke.pavadinimas
-                + "\t      " + keiciamaPreke.kiekis + "\t     " + keiciamaPreke.svoris
-                + "\t        " + keiciamaPreke.didmKaina + "\t              " + keiciamaPreke.mazKaina);
+        String s = "               ";
 
-        System.out.println("_______________________________________________________________________________");
+        String prekesID = Integer.toString(keiciamaPreke.ID);
+        prekesID = prekesID + s.substring(prekesID.length() + 1);
+
+        String pavadinimas = keiciamaPreke.pavadinimas;
+        pavadinimas = pavadinimas + s.substring(pavadinimas.length() + 1);
+
+        String kiekis = Double.toString(keiciamaPreke.kiekis);
+        kiekis = kiekis + s.substring(kiekis.length() + 1);
+
+        String svoris = Double.toString(keiciamaPreke.svoris);
+        svoris = svoris + s.substring(svoris.length() + 1);
+
+        String didmenineKaina = Double.toString(keiciamaPreke.didmKaina);
+        didmenineKaina = didmenineKaina + s.substring(didmenineKaina.length() + 1);
+
+        String mazmenineKaina = Double.toString(keiciamaPreke.mazKaina);
+        mazmenineKaina = mazmenineKaina + s.substring(mazmenineKaina.length() + 1);
+
+        System.out.println(prekesID + "\t" + pavadinimas
+                + "\t" + kiekis + "\t" + svoris
+                + "\t" + didmenineKaina + "\t" + mazmenineKaina);
+
+        System.out.println("_______________________________________________________________________________________________");
 
     }
 
+    public static void rastosPrekesSpausdinimasPirkejui(Preke keiciamaPreke) {
+
+        System.out.println("_______________________________________________________________________________________________");
+        System.out.println("Prekes ID       Pavadinimas     Kiekis          Svoris        Mazmenine kaina");
+        System.out.println("_______________________________________________________________________________________________");
+
+        String s = "               ";
+
+        String prekesID = Integer.toString(keiciamaPreke.ID);
+        prekesID = prekesID + s.substring(prekesID.length() + 1);
+
+        String pavadinimas = keiciamaPreke.pavadinimas;
+        pavadinimas = pavadinimas + s.substring(pavadinimas.length() + 1);
+
+        String kiekis = Double.toString(keiciamaPreke.kiekis);
+        kiekis = kiekis + s.substring(kiekis.length() + 1);
+
+        String svoris = Double.toString(keiciamaPreke.svoris);
+        svoris = svoris + s.substring(svoris.length() + 1);
+
+        String mazmenineKaina = Double.toString(keiciamaPreke.mazKaina);
+        mazmenineKaina = mazmenineKaina + s.substring(mazmenineKaina.length() + 1);
+
+        System.out.println(prekesID + "\t" + pavadinimas
+                + "\t" + kiekis + "\t" + svoris
+                + "\t" + mazmenineKaina);
+
+        System.out.println("_______________________________________________________________________________________________");
+
+    }
 
 }

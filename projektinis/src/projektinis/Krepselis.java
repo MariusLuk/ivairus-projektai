@@ -34,21 +34,30 @@ public class Krepselis {
 		System.out.println();
 	}
 
-	public static void krepselioPrekesSpausdinimasPirkejui(int prekesID) {
+	public static void krepselioPrekesSpausdinimasPirkejui(Preke p) {
 		System.out.println();
 
-		for (Preke p : Krepselis.prekes) {
-			if (p.ID == prekesID) {
-				System.out.println(
-						"Prekes ID " + p.ID + ", pavadinimas " + p.pavadinimas + ", kiekis krepselyje siuo metu: " + p.kiekis);
-				System.out.println("Mazmenine kaina " + p.mazKaina + " EUR");
-			}
-		}
+		System.out.println("Prekes ID " + p.ID + ", pavadinimas " + p.pavadinimas + ", kiekis krepselyje siuo metu: " + p.kiekis);
+		System.out.println("Mazmenine kaina " + p.mazKaina + " EUR");
+
 		System.out.println();
 	}
 
 	public static void istustinkKrepseli() {
 		prekes.clear();
 		krepselioKaina = 0;
+	}
+
+	public static Preke ieskotiPrekeKrepselyjePagalId(int prekesID){
+
+		Preke rastaPreke = null;
+
+		for (Preke p : Krepselis.prekes) {
+			if (p.ID == prekesID) {
+				rastaPreke = p;
+			}
+		}
+
+		return rastaPreke;
 	}
 }

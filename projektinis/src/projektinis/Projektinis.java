@@ -1,7 +1,5 @@
 package projektinis;
 
-import com.sun.xml.internal.bind.v2.TODO;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -40,8 +38,8 @@ public class Projektinis {
 
 
     // Method for testing
-    public static void test(){
-        Sandelis.sandelioPrekesSpausdinimasAdminui(1234567);
+    public static void test() {
+//        Sandelis.sandelioPrekesSpausdinimasAdminui(1234567);
 
     }
 
@@ -202,24 +200,17 @@ public class Projektinis {
 
         int prekesID = teigSkaiciausNuskaitymas();
 
-        boolean arYraKrepselyje = false;
-        for (Preke k : Krepselis.prekes) {
-            if (k.ID == prekesID) {
-                arYraKrepselyje = true;
-            }
-        }
-        if (arYraKrepselyje) {
+        Preke rastaPrekeKrepselyje = Krepselis.ieskotiPrekeKrepselyjePagalId(prekesID);
+
+        if (rastaPrekeKrepselyje != null) {
             System.out.println("Preke su tokiu ID jau yra Jusu krepselyje! Galite tiesiog keisti jos kieki.");
-            pirkejoMeniu12211(prekesID);
+            pirkejoMeniu12211(rastaPrekeKrepselyje);
         } else {
-            boolean arYraSandely = false;
-            for (Preke p : Sandelis.prekes) {
-                if (p.ID == prekesID) {
-                    arYraSandely = true;
-                }
-            }
-            if (arYraSandely) {
-                pirkejoMeniu1111(prekesID);
+
+            Preke rastaPrekeSandelyje = Sandelis.ieskotiSandelyjePrekesPagalID(prekesID);
+
+            if (rastaPrekeSandelyje.ID != 0) {
+                pirkejoMeniu1111(rastaPrekeSandelyje, rastaPrekeKrepselyje);
             } else {
                 System.out.println("Toks prekes ID nerastas!");
                 pirkejoMeniu11();
@@ -227,19 +218,16 @@ public class Projektinis {
         }
     }
 
-    public static void pirkejoMeniu1111(int prekesID) {
-        Sandelis.sandelioPrekesSpausdinimasPirkejui(prekesID);
+    public static void pirkejoMeniu1111(Preke rastaPrekeSandelyje, Preke rastaPrekeKrepselyje) {
+        Sandelis.rastosPrekesSpausdinimasPirkejui(rastaPrekeSandelyje);
         System.out.println("Iveskite norima prekes kieki");
         int pirkejoNorimasKiekis = Projektinis.kiekioNuskaitymas();
-        for (Preke prekeIsSandelio : Sandelis.prekes) {
-            if (prekeIsSandelio.ID == prekesID) {
-                if ((prekeIsSandelio.kiekis /*- krepselio prekiu masyve jau esancios tos pacios prekes kiekis(jei toks jau yra)*/) >= pirkejoNorimasKiekis) {
-                    Krepselis.PrekeToKrepselis(prekeIsSandelio, pirkejoNorimasKiekis);
-                } else {
-                    System.out.println("Nepakankamas prekes likutis parduotuveje!");
-                    Projektinis.pirkejoMeniu11();
-                }
-            }
+
+        if (rastaPrekeSandelyje.kiekis >= pirkejoNorimasKiekis) { /*- krepselio prekiu masyve jau esancios tos pacios prekes kiekis(jei toks jau yra)*/
+            Krepselis.PrekeToKrepselis(rastaPrekeSandelyje, pirkejoNorimasKiekis);
+        } else {
+            System.out.println("Nepakankamas prekes likutis parduotuveje!");
+            Projektinis.pirkejoMeniu11();
         }
         pirkejoMeniu12();
     }
@@ -360,27 +348,23 @@ public class Projektinis {
         System.out.println("Iveskite ID prekes, kuria norite keisti");
         int prekesID = teigSkaiciausNuskaitymas();
 
-        boolean arYraKrepselyje = false;
-        for (Preke p : Krepselis.prekes) {
-            if (p.ID == prekesID) {
-                arYraKrepselyje = true;
-            }
-        }
-        if (arYraKrepselyje) {
-            pirkejoMeniu12211(prekesID);
+        Preke rastaPreke = Krepselis.ieskotiPrekeKrepselyjePagalId(prekesID);
+
+        if (rastaPreke != null) {
+            pirkejoMeniu12211(rastaPreke);
         } else {
             System.out.println("Prekes su tokiu ID Jusu krepselyje nera!");
             pirkejoMeniu122();
         }
     }
 
-    public static void pirkejoMeniu12211(int prekesID) {
+    public static void pirkejoMeniu12211(Preke rastaPrekeKrepselyje) {
 //		Rodomas prekes kiekis, jau esantis krepselyje:
-        Krepselis.krepselioPrekesSpausdinimasPirkejui(prekesID);
+        Krepselis.krepselioPrekesSpausdinimasPirkejui(rastaPrekeKrepselyje);
 //		Rodomas likes aktualios prekes kiekis sandelyje:
-        Sandelis.sandelioPrekesSpausdinimasPirkejui(prekesID);
+        Sandelis.sandelioPrekesSpausdinimasPirkejui(rastaPrekeKrepselyje.ID);
 
-        Preke.keiskPrekesKiekiKrepselyje(prekesID);
+        Preke.keiskPrekesKiekiKrepselyje(rastaPrekeKrepselyje);
 
         pirkejoMeniu12();
     }
@@ -413,11 +397,10 @@ public class Projektinis {
     }
 
     public static void adminMeniu2() {
-
         System.out.println("Naviguojate ADMINISTRATORIAUS MENIU. Pasirinkite norima veiksma:");
         System.out.println();
         System.out.println("0 - Grizti i pradzia");
-        System.out.println("1 - Prekiu atsargos sandelyje ir ju keitimas");
+        System.out.println("1 - Prekiu atsargu sandelyje perziura ir/ar ju keitimas");
         System.out.println("2 - Pinigu likutis ir jo keitimas");
         System.out.println("3 - Uzsakymu isklotines perziura");
         System.out.println("4 - Baigti darba ir iseiti is programos");
@@ -470,15 +453,8 @@ public class Projektinis {
         Sandelis.sandelioSpausdinimasAdminui();
         System.out.println("Iveskite prekes ID");
         int prekesID = teigSkaiciausNuskaitymas();
-//        boolean arYraSandely = false;
-        Preke rastaPreke = Sandelis.ieskotiPrekesPagalID(prekesID);
+        Preke rastaPreke = Sandelis.ieskotiSandelyjePrekesPagalID(prekesID);
 
-        /*
-        for (Preke p : Sandelis.prekes) {
-            if (p.ID == prekesID) {
-                arYraSandely = true;
-            }
-        }*/
         if (rastaPreke.ID != 0) {
             adminMeniu2111(rastaPreke);
         } else {
@@ -489,12 +465,7 @@ public class Projektinis {
     }
 
     public static void adminMeniu2111(Preke keiciamaPreke) {
-        //TODO
-        // Sandelis.sandelioPrekesSpausdinimasAdminui(prekesID);
-
-        // Spausdinti rasta preke
         Sandelis.rastosPrekesSpausdinimasAdminui(keiciamaPreke);
-
         PiniguLikutis.spausdinkPiniguLikuti();
         Preke.keiskPrekesKiekiSandely(keiciamaPreke);
         adminMeniu21();
@@ -503,10 +474,7 @@ public class Projektinis {
     // Papildyti sandeli
     public static void adminMeniu212() {
 
-        //1. Rodomas pinigu likuts
         PiniguLikutis.spausdinkPiniguLikuti();
-
-
         Preke.nuskaitykNaujaPrekeToSandelis();
         adminMeniu21();
     }
@@ -557,7 +525,7 @@ public class Projektinis {
     }
 
     public static void rodykUzsakymuAtaskaita() {
-        String url = "jdbc:sqlite:C:\\git\\source\\projects-to-git\\projektinis\\uzsakymuAtaskaita.db";
+        String url = "jdbc:sqlite:uzsakymuAtaskaita.db";
         String sql = "SELECT pirkejoID, pirkejoPavadinimas, pirkejoEmail, pirkejoAdresas, krepselioKaina, uzsakymoDataLaikas FROM uzsakymai";
 
         try (Connection conn = DriverManager.getConnection(url);
@@ -582,4 +550,6 @@ public class Projektinis {
         pradzia();
 
     }
+
+
 }
