@@ -120,8 +120,7 @@ public class Sandelis {
 
             stmt.setInt(1, prekesID);
             ResultSet rs = stmt.executeQuery();
-
-            System.out.println("nuskaitymas ivyko");
+//            System.out.println("nuskaitymas ivyko");
 
             if (rs.next()) {
                 rastaPreke.ID = rs.getInt("PrekesID");
@@ -147,8 +146,7 @@ public class Sandelis {
             pstmt.setInt(1, kiekis);
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
-
-            System.out.println("Kiekis atnaujintas");
+//            System.out.println("Kiekis atnaujintas");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

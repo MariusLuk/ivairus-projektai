@@ -283,11 +283,8 @@ public class Projektinis {
         // TODO: jei viskas ok, tai toliau:
 
         Sandelis.krepselioPrekiuIsemimasIsSandelio();
-
         uzsakymasToAtaskaita(pirkejoID, pirkejoPavadinimas, pirkejoEmail, pirkejoAdresas, Krepselis.krepselioKaina);
-
         PiniguLikutis.keiskPiniguLikuti(Krepselis.krepselioKaina);
-
         Krepselis.istustinkKrepseli();
 
         System.out.println("Uzsakymas patvirtintas ir artimiausiu metu bus issiustas Jums!");
@@ -299,7 +296,7 @@ public class Projektinis {
 
     public static void uzsakymasToAtaskaita(int pirkejoID, String pirkejoPavadinimas, String pirkejoEmail,
                                             String pirkejoAdresas, double krepselioKaina) {
-        String url = "jdbc:sqlite:C:\\git\\source\\projects-to-git\\projektinis\\uzsakymuAtaskaita.db";
+        String url = "jdbc:sqlite:projektinioDuomenuBaze.db";
         String sql = "INSERT INTO uzsakymai(pirkejoID,pirkejoPavadinimas,pirkejoEmail,pirkejoAdresas,krepselioKaina) VALUES(?,?,?,?,?)";
 
         try (Connection conn = DriverManager.getConnection(url); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -518,57 +515,43 @@ public class Projektinis {
     }
 
     public static void rodykUzsakymuAtaskaita() {
-        String url = "jdbc:sqlite:uzsakymuAtaskaita.db";
+        String url = "jdbc:sqlite:projektinioDuomenuBaze.db";
         String sql = "SELECT pirkejoID, pirkejoPavadinimas, pirkejoEmail, pirkejoAdresas, krepselioKaina, uzsakymoDataLaikas FROM uzsakymai";
-        String s = "                      ";
+        String s = "                          ";
 
 
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-            System.out.println(
-                    "Pirkejo ID --- Pavarde arba pavadinimas --- Pirkejo e-mail ---- Pirkejo adresas --------- Pirkinio suma --- Uzsakymo data/laikas");
+            System.out.println("________________________________________________________________________________________________________________________________________________________________");
+            System.out.println("Pirkejo ID                  Pavarde arba pavadinimas    Pirkejo e-mail              Pirkejo adresas             Uzsakymo suma EUR           Uzsakymo data/laikas");
+            System.out.println("________________________________________________________________________________________________________________________________________________________________");
             while (rs.next()) {
-                System.out.println(rs.getInt("pirkejoID") + "\t       " + rs.getString("pirkejoPavadinimas")
-                        + "\t           " + rs.getString("pirkejoEmail") + "\t" + rs.getString("pirkejoAdresas")
-                        + "\t   " + rs.getDouble("krepselioKaina") + " EUR " + "\t    "
-                        + rs.getString("uzsakymoDataLaikas"));
+
+                String pirkejoIDAtaskaitai = rs.getString("pirkejoID");
+                pirkejoIDAtaskaitai = pirkejoIDAtaskaitai + s.substring(pirkejoIDAtaskaitai.length() + 1);
+
+                String pirkejoPavadinimasAtaskaitai = rs.getString("pirkejoPavadinimas");
+                pirkejoPavadinimasAtaskaitai = pirkejoPavadinimasAtaskaitai + s.substring(pirkejoPavadinimasAtaskaitai.length() + 1);
+
+                String pirkejoEmailAtaskaitai = rs.getString("pirkejoEmail");
+                pirkejoEmailAtaskaitai = pirkejoEmailAtaskaitai + s.substring(pirkejoEmailAtaskaitai.length() + 1);
+
+                String pirkejoAdresasAtaskaitai = rs.getString("pirkejoAdresas");
+                pirkejoAdresasAtaskaitai = pirkejoAdresasAtaskaitai + s.substring(pirkejoAdresasAtaskaitai.length() + 1);
+
+                String krepselioKainaAtaskaitai = rs.getString("krepselioKaina");
+                krepselioKainaAtaskaitai = krepselioKainaAtaskaitai + s.substring(krepselioKainaAtaskaitai.length() + 1);
+
+                String uzsakymoDataLaikasAtaskaitai = rs.getString("uzsakymoDataLaikas");
+                uzsakymoDataLaikasAtaskaitai = uzsakymoDataLaikasAtaskaitai + s.substring(uzsakymoDataLaikasAtaskaitai.length() + 1);
+
+                System.out.println(pirkejoIDAtaskaitai + "\t" + pirkejoPavadinimasAtaskaitai + "\t" + pirkejoEmailAtaskaitai + "\t" +
+                        pirkejoAdresasAtaskaitai + "\t" + krepselioKainaAtaskaitai + "\t" + uzsakymoDataLaikasAtaskaitai);
             }
+            System.out.println("_______________________________________________________________________________________________________________________________________________________________");
             System.out.println();
-
-//            System.out.println("__________________________________________________________________________________________________________________________________________");
-//            System.out.println("Pirkejo ID       Pavarde arba pavadinimas     Pirkejo e-mail         Pirkejo adresas          Uzsakymo suma (EUR)     Uzsakymo data/laikas");
-//            System.out.println("__________________________________________________________________________________________________________________________________________");
-//            while (rs.next()) {
-//
-//                String pirkejoID = rs.getString("pirkejoID");
-//                pirkejoID = pirkejoID + s.substring(pirkejoID.length() + 1);
-//
-//                String pirkejoPavadinimas = rs.getString("pirkejoPavadinimas");
-//                pirkejoPavadinimas = pirkejoPavadinimas + s.substring(pirkejoPavadinimas.length() + 1);
-//
-//                String pirkejoEmail = rs.getString("pirkejoEmail");
-//                pirkejoEmail = pirkejoEmail + s.substring(pirkejoEmail.length() + 1);
-//
-//                String pirkejoAdresas = rs.getString("pirkejoAdresas");
-//                pirkejoAdresas = pirkejoAdresas + s.substring(pirkejoAdresas.length() + 1);
-//
-//                String krepselioKaina = rs.getString("krepselioKaina");
-//                krepselioKaina = krepselioKaina + s.substring(krepselioKaina.length() + 1);
-//
-//                String uzsakymoDataLaikas = rs.getString("uzsakymoDataLaikas");
-//                uzsakymoDataLaikas = uzsakymoDataLaikas + s.substring(uzsakymoDataLaikas.length() + 1);
-//
-//
-//                System.out.println(pirkejoID + "\t" + pirkejoPavadinimas + "\t" + pirkejoEmail + "\t" + pirkejoAdresas + "\t" + krepselioKaina + "\t" + uzsakymoDataLaikas);
-//            }
-//            System.out.println("__________________________________________________________________________________________________________________________________________");
-
-
-
-
-
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
