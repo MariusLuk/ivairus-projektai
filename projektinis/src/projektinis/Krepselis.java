@@ -8,7 +8,7 @@ public class Krepselis {
 
     static double krepselioKaina = 0;
 
-    public static void PrekeToKrepselis(Preke prekeIsSandelio, int kiekis) {
+    public static void prekeToKrepselis(Preke prekeIsSandelio, int kiekis) {
 
         Preke prekeKrepseliui = new Preke();
         prekeKrepseliui.ID = prekeIsSandelio.ID;
@@ -22,7 +22,6 @@ public class Krepselis {
         krepselioKaina += prekeKrepseliui.kiekis * prekeKrepseliui.mazKaina;
         System.out.println("Jusu pageidaujamas prekes kiekis ikeltas i krepseli.");
         System.out.println();
-
     }
 
     public static void krepselioSpausdinimasPirkejui() {
@@ -39,7 +38,6 @@ public class Krepselis {
             System.out.println("Bendra moketina suma uz visa krepseli: " + krepselioKaina + " EUR");
         }
         System.out.println();
-
     }
 
     public static void krepselioPrekesSpausdinimasPirkejui(Preke p) {
@@ -47,7 +45,6 @@ public class Krepselis {
 
         System.out.println("Prekes ID " + p.ID + ", pavadinimas " + p.pavadinimas + ", kiekis krepselyje siuo metu: " + p.kiekis);
         System.out.println("Mazmenine kaina " + p.mazKaina + " EUR");
-
         System.out.println();
     }
 

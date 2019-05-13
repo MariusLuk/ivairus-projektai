@@ -1,5 +1,5 @@
 package projektinis;
 
-public class Pirkejas {
+public class Pirkejas extends Vartotojas {
 
 }

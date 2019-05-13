@@ -162,8 +162,7 @@ public class Sandelis {
             pstmt.setInt(1, kiekis);
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
-
-            System.out.println("Kiekis atnaujintas");
+//            System.out.println("Kiekis atnaujintas");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -188,7 +187,7 @@ public class Sandelis {
     }
 
 
-    public static void rastosPrekesSpausdinimasAdminui(Preke keiciamaPreke) {
+    public static void rastosSandelioPrekesSpausdinimasAdminui(Preke keiciamaPreke) {
 
         System.out.println("_______________________________________________________________________________________________");
         System.out.println("Prekes ID       Pavadinimas     Kiekis          Svoris        Didmenine kaina   Mazmenine kaina");
@@ -222,11 +221,11 @@ public class Sandelis {
 
     }
 
-    public static void rastosPrekesSpausdinimasPirkejui(Preke keiciamaPreke) {
+    public static void rastosSandelioPrekesSpausdinimasPirkejui(Preke keiciamaPreke) {
 
-        System.out.println("_______________________________________________________________________________________________");
+        System.out.println("_____________________________________________________________________________");
         System.out.println("Prekes ID       Pavadinimas     Kiekis          Svoris        Mazmenine kaina");
-        System.out.println("_______________________________________________________________________________________________");
+        System.out.println("_____________________________________________________________________________");
 
         String s = "               ";
 
@@ -249,7 +248,7 @@ public class Sandelis {
                 + "\t" + kiekis + "\t" + svoris
                 + "\t" + mazmenineKaina);
 
-        System.out.println("_______________________________________________________________________________________________");
+        System.out.println("_____________________________________________________________________________");
 
     }
 

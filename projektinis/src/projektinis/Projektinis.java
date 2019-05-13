@@ -212,12 +212,12 @@ public class Projektinis {
     }
 
     public static void pirkejoMeniu1111(Preke rastaPrekeSandelyje, Preke rastaPrekeKrepselyje) {
-        Sandelis.rastosPrekesSpausdinimasPirkejui(rastaPrekeSandelyje);
+        Sandelis.rastosSandelioPrekesSpausdinimasPirkejui(rastaPrekeSandelyje);
         System.out.println("Iveskite norima prekes kieki");
         int pirkejoNorimasKiekis = Projektinis.kiekioIntNuskaitymas();
 
         if (rastaPrekeSandelyje.kiekis >= pirkejoNorimasKiekis) { /*- krepselio prekiu masyve jau esancios tos pacios prekes kiekis(jei toks jau yra)*/
-            Krepselis.PrekeToKrepselis(rastaPrekeSandelyje, pirkejoNorimasKiekis);
+            Krepselis.prekeToKrepselis(rastaPrekeSandelyje, pirkejoNorimasKiekis);
         } else {
             System.out.println("Nepakankamas prekes likutis parduotuveje!");
             Projektinis.pirkejoMeniu11();
@@ -455,7 +455,7 @@ public class Projektinis {
     }
 
     public static void adminMeniu2111(Preke keiciamaPreke) {
-        Sandelis.rastosPrekesSpausdinimasAdminui(keiciamaPreke);
+        Sandelis.rastosSandelioPrekesSpausdinimasAdminui(keiciamaPreke);
         PiniguLikutis.spausdinkPiniguLikuti();
         Preke.keiskPrekesKiekiSandely(keiciamaPreke);
         adminMeniu21();
