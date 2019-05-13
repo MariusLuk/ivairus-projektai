@@ -36,14 +36,7 @@ public class Projektinis {
         return pasirinkimas;
     }
 
-
-    // Method for testing
-    public static void test() {
-//        Sandelis.sandelioPrekesSpausdinimasAdminui(1234567);
-
-    }
-
-    public static int teigSkaiciausNuskaitymas() {
+    public static int teigIntSkaiciausNuskaitymas() {
         boolean ivestisTinkama = false;
         int pasirinkimas = 0;
 
@@ -64,7 +57,7 @@ public class Projektinis {
         return pasirinkimas;
     }
 
-    public static double teigRealSkaiciausNuskaitymas() {
+    public static double teigDoubleSkaiciausNuskaitymas() {
         boolean ivestisTinkama = false;
         double pasirinkimas = 0;
 
@@ -85,7 +78,7 @@ public class Projektinis {
         return pasirinkimas;
     }
 
-    public static double realSkaiciausNuskaitymas() {
+    public static double doubleSkaiciausNuskaitymas() {
         boolean ivestisTinkama = false;
         double pasirinkimas = 0;
 
@@ -102,7 +95,7 @@ public class Projektinis {
         return pasirinkimas;
     }
 
-    public static int kiekioNuskaitymas() {
+    public static int kiekioIntNuskaitymas() {
         boolean ivestisTinkama = false;
         int pasirinkimas = 0;
 
@@ -198,7 +191,7 @@ public class Projektinis {
         Sandelis.sandelioSpausdinimasPirkejui();
         System.out.println("Iveskite prekes ID");
 
-        int prekesID = teigSkaiciausNuskaitymas();
+        int prekesID = teigIntSkaiciausNuskaitymas();
 
         Preke rastaPrekeKrepselyje = Krepselis.ieskotiPrekeKrepselyjePagalId(prekesID);
 
@@ -221,7 +214,7 @@ public class Projektinis {
     public static void pirkejoMeniu1111(Preke rastaPrekeSandelyje, Preke rastaPrekeKrepselyje) {
         Sandelis.rastosPrekesSpausdinimasPirkejui(rastaPrekeSandelyje);
         System.out.println("Iveskite norima prekes kieki");
-        int pirkejoNorimasKiekis = Projektinis.kiekioNuskaitymas();
+        int pirkejoNorimasKiekis = Projektinis.kiekioIntNuskaitymas();
 
         if (rastaPrekeSandelyje.kiekis >= pirkejoNorimasKiekis) { /*- krepselio prekiu masyve jau esancios tos pacios prekes kiekis(jei toks jau yra)*/
             Krepselis.PrekeToKrepselis(rastaPrekeSandelyje, pirkejoNorimasKiekis);
@@ -279,7 +272,7 @@ public class Projektinis {
 
     public static void nuskaitykPirkejoRekvizitus() {
         System.out.println("Iveskite savo ID");
-        int pirkejoID = teigSkaiciausNuskaitymas();
+        int pirkejoID = teigIntSkaiciausNuskaitymas();
         System.out.println("Iveskite savo varda ir pavarde arba imones pavadinima:");
         String pirkejoPavadinimas = scanner.nextLine();
         System.out.println("Iveskite savo e-mail adresa:");
@@ -346,7 +339,7 @@ public class Projektinis {
     public static void pirkejoMeniu1221() {
         Krepselis.krepselioSpausdinimasPirkejui();
         System.out.println("Iveskite ID prekes, kuria norite keisti");
-        int prekesID = teigSkaiciausNuskaitymas();
+        int prekesID = teigIntSkaiciausNuskaitymas();
 
         Preke rastaPreke = Krepselis.ieskotiPrekeKrepselyjePagalId(prekesID);
 
@@ -371,8 +364,8 @@ public class Projektinis {
 
     public static void tikrinkAdminPassword() {
         String adminPassword = "1234";
-//        String ivestasPassword = null;
-        String ivestasPassword = "1234";
+        String ivestasPassword = null;
+//        String ivestasPassword = "1234";
         int blogoPasswordSkaitliukas = 0;
 
         while (!adminPassword.equals(ivestasPassword) && blogoPasswordSkaitliukas < 3) {
@@ -452,7 +445,7 @@ public class Projektinis {
     public static void adminMeniu211() {
         Sandelis.sandelioSpausdinimasAdminui();
         System.out.println("Iveskite prekes ID");
-        int prekesID = teigSkaiciausNuskaitymas();
+        int prekesID = teigIntSkaiciausNuskaitymas();
         Preke rastaPreke = Sandelis.ieskotiSandelyjePrekesPagalID(prekesID);
 
         if (rastaPreke.ID != 0) {
@@ -500,7 +493,7 @@ public class Projektinis {
     public static void adminMeniu221() {
         PiniguLikutis.spausdinkPiniguLikuti();
         System.out.println("Iveskite pinigu pokyti (+/-) EUR");
-        double ivestasPokytis = realSkaiciausNuskaitymas();
+        double ivestasPokytis = doubleSkaiciausNuskaitymas();
         if ((PiniguLikutis.getKiekis() + ivestasPokytis) >= 0) {
             PiniguLikutis.keiskPiniguLikuti(ivestasPokytis);
         } else {
@@ -527,10 +520,13 @@ public class Projektinis {
     public static void rodykUzsakymuAtaskaita() {
         String url = "jdbc:sqlite:uzsakymuAtaskaita.db";
         String sql = "SELECT pirkejoID, pirkejoPavadinimas, pirkejoEmail, pirkejoAdresas, krepselioKaina, uzsakymoDataLaikas FROM uzsakymai";
+        String s = "                      ";
+
 
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
+
             System.out.println(
                     "Pirkejo ID --- Pavarde arba pavadinimas --- Pirkejo e-mail ---- Pirkejo adresas --------- Pirkinio suma --- Uzsakymo data/laikas");
             while (rs.next()) {
@@ -540,16 +536,47 @@ public class Projektinis {
                         + rs.getString("uzsakymoDataLaikas"));
             }
             System.out.println();
+
+//            System.out.println("__________________________________________________________________________________________________________________________________________");
+//            System.out.println("Pirkejo ID       Pavarde arba pavadinimas     Pirkejo e-mail         Pirkejo adresas          Uzsakymo suma (EUR)     Uzsakymo data/laikas");
+//            System.out.println("__________________________________________________________________________________________________________________________________________");
+//            while (rs.next()) {
+//
+//                String pirkejoID = rs.getString("pirkejoID");
+//                pirkejoID = pirkejoID + s.substring(pirkejoID.length() + 1);
+//
+//                String pirkejoPavadinimas = rs.getString("pirkejoPavadinimas");
+//                pirkejoPavadinimas = pirkejoPavadinimas + s.substring(pirkejoPavadinimas.length() + 1);
+//
+//                String pirkejoEmail = rs.getString("pirkejoEmail");
+//                pirkejoEmail = pirkejoEmail + s.substring(pirkejoEmail.length() + 1);
+//
+//                String pirkejoAdresas = rs.getString("pirkejoAdresas");
+//                pirkejoAdresas = pirkejoAdresas + s.substring(pirkejoAdresas.length() + 1);
+//
+//                String krepselioKaina = rs.getString("krepselioKaina");
+//                krepselioKaina = krepselioKaina + s.substring(krepselioKaina.length() + 1);
+//
+//                String uzsakymoDataLaikas = rs.getString("uzsakymoDataLaikas");
+//                uzsakymoDataLaikas = uzsakymoDataLaikas + s.substring(uzsakymoDataLaikas.length() + 1);
+//
+//
+//                System.out.println(pirkejoID + "\t" + pirkejoPavadinimas + "\t" + pirkejoEmail + "\t" + pirkejoAdresas + "\t" + krepselioKaina + "\t" + uzsakymoDataLaikas);
+//            }
+//            System.out.println("__________________________________________________________________________________________________________________________________________");
+
+
+
+
+
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
     public static void main(String[] args) {
-        // test();
         pradzia();
-
     }
-
 
 }

@@ -3,6 +3,7 @@ package projektinis;
 import java.util.ArrayList;
 
 public class Krepselis {
+
 	public static ArrayList<Preke> prekes = new ArrayList<>();
 
 	static double krepselioKaina = 0;

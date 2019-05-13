@@ -16,7 +16,7 @@ public class Preke {
 
 //		System.out.println("0 - Grizti atgal");
         System.out.println("Iveskite naujos prekes ID");
-        int ID = Projektinis.teigSkaiciausNuskaitymas();
+        int ID = Projektinis.teigIntSkaiciausNuskaitymas();
 
         Preke rastaPreke = Sandelis.ieskotiSandelyjePrekesPagalID(ID);
 
@@ -29,13 +29,13 @@ public class Preke {
             String pavadinimas = scanner.nextLine();
             System.out.println();
             System.out.println("Iveskite uzsakoma naujos prekes kieki:");
-            int kiekis = Projektinis.teigSkaiciausNuskaitymas();
+            int kiekis = Projektinis.teigIntSkaiciausNuskaitymas();
             System.out.println("Iveskite naujos prekes svori:");
-            double svoris = Projektinis.teigRealSkaiciausNuskaitymas();
+            double svoris = Projektinis.teigDoubleSkaiciausNuskaitymas();
             System.out.println("Iveskite naujos prekes didmenine kaina:");
-            double didmKaina = Projektinis.teigRealSkaiciausNuskaitymas();
+            double didmKaina = Projektinis.teigDoubleSkaiciausNuskaitymas();
             System.out.println("Iveskite naujos prekes mazmenine kaina:");
-            double mazKaina = Projektinis.teigRealSkaiciausNuskaitymas();
+            double mazKaina = Projektinis.teigDoubleSkaiciausNuskaitymas();
 //		jei ivedamas 0, iskart suveikia grizimas atgal i adminMeniu21();
 
             Preke naujaPreke = new Preke();
@@ -63,7 +63,7 @@ public class Preke {
 
     public static void keiskPrekesKiekiSandely(Preke keiciamaPreke) {
         System.out.println("Iveskite norima prekes kiekio korekcija (+/-)");
-        int ivestaKiekioKorekcija = Projektinis.kiekioNuskaitymas();
+        int ivestaKiekioKorekcija = Projektinis.kiekioIntNuskaitymas();
 
         if (ivestaKiekioKorekcija * keiciamaPreke.didmKaina > PiniguLikutis.getKiekis()) {
             System.out.println("Nepakankamas pinigu likutis parduotuveje!");
@@ -82,7 +82,7 @@ public class Preke {
 
     public static void keiskPrekesKiekiKrepselyje(Preke rastaPrekeKrepselyje) {
         System.out.println("Kokio is tiesu sios prekes kiekio pageidaujate?");
-        int patikslintasKiekis = Projektinis.teigSkaiciausNuskaitymas();
+        int patikslintasKiekis = Projektinis.teigIntSkaiciausNuskaitymas();
 
         Preke rastaPrekeSandelyje =  Sandelis.ieskotiSandelyjePrekesPagalID(rastaPrekeKrepselyje.ID);
 
