@@ -16,26 +16,26 @@ public class Preke {
 
 //		System.out.println("0 - Grizti atgal");
         System.out.println("Iveskite naujos prekes ID");
-        int ID = Projektinis.teigIntSkaiciausNuskaitymas();
+        int ID = Nuskaitymai.teigIntSkaiciausNuskaitymas();
 
         Preke rastaPreke = Sandelis.ieskotiSandelyjePrekesPagalID(ID);
 
         if (rastaPreke.ID != 0) {
             System.out.println("Preke su tokiu ID jau yra sandelyje! Galite tiesiog keisti jos kieki.");
-            Projektinis.adminMeniu2111(rastaPreke);
+            Navigacija.adminMeniu2111(rastaPreke);
 
         } else {
             System.out.println("Iveskite naujos prekes pavadinima:");
             String pavadinimas = scanner.nextLine();
             System.out.println();
             System.out.println("Iveskite uzsakoma naujos prekes kieki:");
-            int kiekis = Projektinis.teigIntSkaiciausNuskaitymas();
+            int kiekis = Nuskaitymai.teigIntSkaiciausNuskaitymas();
             System.out.println("Iveskite naujos prekes svori:");
-            double svoris = Projektinis.teigDoubleSkaiciausNuskaitymas();
+            double svoris = Nuskaitymai.teigDoubleSkaiciausNuskaitymas();
             System.out.println("Iveskite naujos prekes didmenine kaina:");
-            double didmKaina = Projektinis.teigDoubleSkaiciausNuskaitymas();
+            double didmKaina = Nuskaitymai.teigDoubleSkaiciausNuskaitymas();
             System.out.println("Iveskite naujos prekes mazmenine kaina:");
-            double mazKaina = Projektinis.teigDoubleSkaiciausNuskaitymas();
+            double mazKaina = Nuskaitymai.teigDoubleSkaiciausNuskaitymas();
 //		jei ivedamas 0, iskart suveikia grizimas atgal i adminMeniu21();
 
             Preke naujaPreke = new Preke();
@@ -55,7 +55,7 @@ public class Preke {
                 naujaPreke.kiekis = 0;
                 System.out.println("Nepakankamas pinigu likutis parduotuveje!");
                 System.out.println();
-                Projektinis.adminMeniu22();
+                Navigacija.adminMeniu22();
             }
             Sandelis.irasytiPrekeToSandelioDB(naujaPreke);
         }
@@ -63,33 +63,35 @@ public class Preke {
 
     public static void keiskPrekesKiekiSandely(Preke keiciamaPreke) {
         System.out.println("Iveskite norima prekes kiekio korekcija (+/-)");
-        int ivestaKiekioKorekcija = Projektinis.kiekioIntNuskaitymas();
+        int ivestaKiekioKorekcija = Nuskaitymai.kiekioIntNuskaitymas();
 
         if (ivestaKiekioKorekcija * keiciamaPreke.didmKaina > PiniguLikutis.getKiekis()) {
             System.out.println("Nepakankamas pinigu likutis parduotuveje!");
             System.out.println();
-            Projektinis.adminMeniu2111(keiciamaPreke);
+            Navigacija.adminMeniu2111(keiciamaPreke);
         } else if (-ivestaKiekioKorekcija > keiciamaPreke.kiekis) {
             System.out.println("Nepakankamas prekes likutis sandelyje!");
             System.out.println();
-            Projektinis.adminMeniu2111(keiciamaPreke);
+            Navigacija.adminMeniu2111(keiciamaPreke);
         } else {
-            keiciamaPreke.kiekis += ivestaKiekioKorekcija;
+            // keiciamaPreke.kiekis += ivestaKiekioKorekcija;
             PiniguLikutis.keiskPiniguLikuti(-ivestaKiekioKorekcija * keiciamaPreke.didmKaina);
-            Sandelis.keistiPrekesKiekiSandelioDB(keiciamaPreke.ID, keiciamaPreke.kiekis);
+            Sandelis.keistiPrekesKiekiSandelioDB(keiciamaPreke.ID, ivestaKiekioKorekcija);
+
+
         }
     }
 
     public static void keiskPrekesKiekiKrepselyje(Preke rastaPrekeKrepselyje) {
         System.out.println("Kokio is tiesu sios prekes kiekio pageidaujate?");
-        int patikslintasKiekis = Projektinis.teigIntSkaiciausNuskaitymas();
+        int patikslintasKiekis = Nuskaitymai.teigIntSkaiciausNuskaitymas();
 
         Preke rastaPrekeSandelyje =  Sandelis.ieskotiSandelyjePrekesPagalID(rastaPrekeKrepselyje.ID);
 
         if (patikslintasKiekis > rastaPrekeSandelyje.kiekis) {
             System.out.println("Nepakankamas prekes likutis parduotuveje!");
             System.out.println();
-            Projektinis.pirkejoMeniu122();
+            Navigacija.pirkejoMeniu122();
         } else {
             Krepselis.krepselioKaina += (patikslintasKiekis - rastaPrekeKrepselyje.kiekis)
                     * rastaPrekeKrepselyje.mazKaina;

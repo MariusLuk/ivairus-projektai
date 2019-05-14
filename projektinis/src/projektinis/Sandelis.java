@@ -104,7 +104,7 @@ public class Sandelis {
         System.out.println();
 
         for (Preke krepselioPreke : Krepselis.prekes) {
-            mazintiPrekesKiekiSandelioDB(krepselioPreke.ID, krepselioPreke.kiekis);
+            keistiPrekesKiekiSandelioDB(krepselioPreke.ID, -krepselioPreke.kiekis);
         }
 
         System.out.println();
@@ -138,7 +138,7 @@ public class Sandelis {
     }
 
     public static void keistiPrekesKiekiSandelioDB(int id, int kiekis) {
-        String sql = "UPDATE sandelis SET kiekis = ?" + "WHERE PrekesId = ?";
+        String sql = "UPDATE sandelis SET kiekis = kiekis + ?" + "WHERE PrekesId = ?";
 
         try (Connection conn = DriverManager.getConnection(url);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -146,23 +146,6 @@ public class Sandelis {
             pstmt.setInt(1, kiekis);
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
-//            System.out.println("Kiekis atnaujintas");
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public static void mazintiPrekesKiekiSandelioDB(int id, int kiekis) {
-        String sql = "UPDATE sandelis SET kiekis = kiekis - ?" + "WHERE PrekesId = ?";
-
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setInt(1, kiekis);
-            pstmt.setInt(2, id);
-            pstmt.executeUpdate();
-//            System.out.println("Kiekis atnaujintas");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

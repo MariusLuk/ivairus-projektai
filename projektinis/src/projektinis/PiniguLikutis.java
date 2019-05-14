@@ -1,12 +1,33 @@
 package projektinis;
 
+import java.sql.*;
+
 public class PiniguLikutis {
-	public String valiuta = "EUR";
-	private static Double kiekis = 100.0;
+
+	private static Double kiekis;
+	public static String url = "jdbc:sqlite:projektinioDuomenuBaze.db";
+
+	public static double nuskaitykPiniguLikutiDB(){
+		String sql = "SELECT * FROM piniguLikutis";
+
+		try (Connection conn = DriverManager.getConnection(url);
+			 Statement stmt = conn.createStatement();
+			 ResultSet rs = stmt.executeQuery(sql)) {
+
+			while (rs.next()) {
+				kiekis =  rs.getDouble("Likutis");
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+		return kiekis;
+	}
 
 	public static void keiskPiniguLikuti(double piniguPokytis) {
 		kiekis += piniguPokytis;
-//		spausdinkPiniguLikuti();
+		PiniguLikutis.atnaujintiPiniguLikutiDB(kiekis);
+
 	}
 
 	public static Double getKiekis() {
@@ -14,11 +35,26 @@ public class PiniguLikutis {
 	}
 
 	public static void setKiekis(Double kiekis) {
-		PiniguLikutis.kiekis = kiekis;
+		atnaujintiPiniguLikutiDB(kiekis);
+	}
+
+	private static void atnaujintiPiniguLikutiDB(Double kiekis) {
+		String sql = "UPDATE piniguLikutis SET Likutis = ?";
+
+		try (Connection conn = DriverManager.getConnection(url);
+			 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+			pstmt.setDouble(1, kiekis);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
 
 	public static void spausdinkPiniguLikuti() {
-		System.out.println("Pinigu likutis parduotuveje siuo metu: " + PiniguLikutis.getKiekis() + " EUR");
+		System.out.println("Pinigu likutis parduotuveje siuo metu: " + PiniguLikutis.nuskaitykPiniguLikutiDB() + " EUR");
 		System.out.println();
 	}
 }
