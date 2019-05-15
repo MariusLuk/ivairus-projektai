@@ -1,13 +1,14 @@
 package projektinis;
 
 public class Nuskaitymai {
+
     public static int nuskaitymas(int maxIvestis) {
         boolean ivestisTinkama = false;
         int pasirinkimas = 0;
 
         do {
-            if (Projektinis.scanner.hasNextInt()) {
-                pasirinkimas = Projektinis.scanner.nextInt();
+            if (ProjektinisMain.scanner.hasNextInt()) {
+                pasirinkimas = ProjektinisMain.scanner.nextInt();
                 if (pasirinkimas >= 0 && pasirinkimas <= maxIvestis) {
                     ivestisTinkama = true;
                 } else {
@@ -17,7 +18,7 @@ public class Nuskaitymai {
                 System.out.println("Nekorektiska ivestis! Pakartokite dar karta.");
             }
 
-            Projektinis.scanner.nextLine();
+            ProjektinisMain.scanner.nextLine();
         } while (!ivestisTinkama);
         System.out.println();
         return pasirinkimas;
@@ -28,8 +29,8 @@ public class Nuskaitymai {
         int pasirinkimas = 0;
 
         do {
-            if (Projektinis.scanner.hasNextInt()) {
-                pasirinkimas = Projektinis.scanner.nextInt();
+            if (ProjektinisMain.scanner.hasNextInt()) {
+                pasirinkimas = ProjektinisMain.scanner.nextInt();
                 if (pasirinkimas > 0) {
                     ivestisTinkama = true;
                 } else {
@@ -38,7 +39,7 @@ public class Nuskaitymai {
             } else {
                 System.out.println("Nekorektiska ivestis! Pakartokite dar karta.");
             }
-            Projektinis.scanner.nextLine();
+            ProjektinisMain.scanner.nextLine();
         } while (!ivestisTinkama);
         System.out.println();
         return pasirinkimas;
@@ -49,8 +50,8 @@ public class Nuskaitymai {
         double pasirinkimas = 0;
 
         do {
-            if (Projektinis.scanner.hasNextDouble()) {
-                pasirinkimas = Projektinis.scanner.nextDouble();
+            if (ProjektinisMain.scanner.hasNextDouble()) {
+                pasirinkimas = ProjektinisMain.scanner.nextDouble();
                 if (pasirinkimas > 0) {
                     ivestisTinkama = true;
                 } else {
@@ -59,7 +60,7 @@ public class Nuskaitymai {
             } else {
                 System.out.println("Nekorektiska ivestis! Pakartokite dar karta.");
             }
-            Projektinis.scanner.nextLine();
+            ProjektinisMain.scanner.nextLine();
         } while (!ivestisTinkama);
         System.out.println();
         return pasirinkimas;
@@ -70,13 +71,13 @@ public class Nuskaitymai {
         double pasirinkimas = 0;
 
         do {
-            if (Projektinis.scanner.hasNextDouble()) {
-                pasirinkimas = Projektinis.scanner.nextDouble();
+            if (ProjektinisMain.scanner.hasNextDouble()) {
+                pasirinkimas = ProjektinisMain.scanner.nextDouble();
                 ivestisTinkama = true;
             } else {
                 System.out.println("Nekorektiska ivestis! Pakartokite dar karta.");
             }
-            Projektinis.scanner.nextLine();
+            ProjektinisMain.scanner.nextLine();
         } while (!ivestisTinkama);
         System.out.println();
         return pasirinkimas;
@@ -87,13 +88,13 @@ public class Nuskaitymai {
         int pasirinkimas = 0;
 
         do {
-            if (Projektinis.scanner.hasNextInt()) {
-                pasirinkimas = Projektinis.scanner.nextInt();
+            if (ProjektinisMain.scanner.hasNextInt()) {
+                pasirinkimas = ProjektinisMain.scanner.nextInt();
                 ivestisTinkama = true;
             } else {
                 System.out.println("Nekorektiska ivestis! Pakartokite dar karta.");
             }
-            Projektinis.scanner.nextLine();
+            ProjektinisMain.scanner.nextLine();
         } while (!ivestisTinkama);
         System.out.println();
         return pasirinkimas;

@@ -1,9 +1,13 @@
 package projektinis;
 
+import javafx.application.Application;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 
 public class Navigacija {
 
@@ -167,15 +171,19 @@ public class Navigacija {
     }
 
     public static void nuskaitykPirkejoRekvizitus() {
+
+        Application.launch(PirkejoDuomenuNuskaitymas.class);
+
+
+
         System.out.println("Iveskite savo ID");
         int pirkejoID = Nuskaitymai.teigIntSkaiciausNuskaitymas();
         System.out.println("Iveskite savo varda ir pavarde arba imones pavadinima:");
-        String pirkejoPavadinimas = Projektinis.scanner.nextLine();
+        String pirkejoPavadinimas = ProjektinisMain.scanner.nextLine();
         System.out.println("Iveskite savo e-mail adresa:");
-        String pirkejoEmail = Projektinis.scanner.nextLine();
+        String pirkejoEmail = ProjektinisMain.scanner.nextLine();
         System.out.println("Iveskite pristatymo adresa:");
-        String pirkejoAdresas = Projektinis.scanner.nextLine();
-
+        String pirkejoAdresas = ProjektinisMain.scanner.nextLine();
         // TODO: jei viskas ok, tai toliau:
 
         Sandelis.krepselioPrekiuIsemimasIsSandelio();
@@ -189,6 +197,12 @@ public class Navigacija {
 
         pirkejoMeniu1();
     }
+
+
+
+
+
+
 
     public static void uzsakymasToAtaskaita(int pirkejoID, String pirkejoPavadinimas, String pirkejoEmail,
                                             String pirkejoAdresas, double krepselioKaina) {
@@ -256,10 +270,10 @@ public class Navigacija {
     }
 
     public static void tikrinkAdminPassword() {
-        System.out.println("Iveskite admin nick name:");
-        String nickName = Projektinis.scanner.nextLine();
+        System.out.println("Iveskite savo administratoriaus prisijungimo varda:");
+        String adminVardas = ProjektinisMain.scanner.nextLine();
 
-        Admin admin = new Admin(nickName);
+        Admin admin = new Admin(adminVardas);
         String adminPasswordFromDB = admin.getPassword();
 
         String ivestasPassword = null;
@@ -267,7 +281,7 @@ public class Navigacija {
 
         while (!adminPasswordFromDB.equals(ivestasPassword) && blogoPasswordSkaitliukas < 3) {
             System.out.println("Iveskite slaptazodi, noredami prisijungti prie ADMINISTRATORIAUS MENIU:");
-            ivestasPassword = Projektinis.scanner.nextLine();
+            ivestasPassword = ProjektinisMain.scanner.nextLine();
             if (!adminPasswordFromDB.equals(ivestasPassword)) {
                 blogoPasswordSkaitliukas = blogoPasswordSkaitliukas + 1;
                 System.out.println("Slaptazodis nekorektiskas!");
@@ -293,9 +307,10 @@ public class Navigacija {
         System.out.println("1 - Prekiu atsargu sandelyje perziura ir/ar ju keitimas");
         System.out.println("2 - Pinigu likutis ir jo keitimas");
         System.out.println("3 - Uzsakymu isklotines perziura");
-        System.out.println("4 - Baigti darba ir iseiti is programos");
+        System.out.println("4 - Keisti administratoriaus slaptazodi");
+        System.out.println("5 - Baigti darba ir iseiti is programos");
 
-        switch (Nuskaitymai.nuskaitymas(4)) {
+        switch (Nuskaitymai.nuskaitymas(5)) {
             case 0:
                 pradzia();
                 break;
@@ -309,6 +324,9 @@ public class Navigacija {
                 adminMeniu23();
                 break;
             case 4:
+                adminMeniu24keiskAdminSlaptazodi();
+                break;
+            case 5:
                 System.out.println("Dekojame, kad apsilankete! Laukiame sugriztant!");
                 System.exit(0);
             default:
@@ -316,6 +334,7 @@ public class Navigacija {
                 adminMeniu2();
         }
     }
+
 
     public static void adminMeniu21() {
         Sandelis.sandelioSpausdinimasAdminui();
@@ -402,7 +421,7 @@ public class Navigacija {
     }
 
     public static void adminMeniu23() {
-        Projektinis.rodykUzsakymuAtaskaita();
+        ProjektinisMain.rodykUzsakymuAtaskaita();
         System.out.println("0 - Grizti atgal");
         switch (Nuskaitymai.nuskaitymas(0)) {
             case 0:
@@ -413,4 +432,24 @@ public class Navigacija {
                 adminMeniu23();
         }
     }
+
+    private static void adminMeniu24keiskAdminSlaptazodi() {
+        System.out.println("Iveskite savo administratoriaus prisijungimo varda:");
+        String adminVardas = ProjektinisMain.scanner.nextLine();
+        Admin admin = new Admin(adminVardas);
+        System.out.println("Iveskite nauja slaptazodi:");
+        String pirmasPasswordoKeitimoBandymas = ProjektinisMain.scanner.nextLine();
+        System.out.println("Pakartokite nauja slaptazodi:");
+        String antrasPasswordoKeitimoBandymas = ProjektinisMain.scanner.nextLine();
+        System.out.println();
+        if (pirmasPasswordoKeitimoBandymas.equals(antrasPasswordoKeitimoBandymas)) {
+            admin.setPassword(antrasPasswordoKeitimoBandymas, adminVardas);
+            System.out.println("Slaptazodis sekmingai pakeistas!");
+        } else {
+            System.out.println("Pakartojimas nekorektiskas - slaptazodzio pakeisti nepavyko!");
+        }
+        System.out.println();
+        Navigacija.adminMeniu2();
+    }
+
 }

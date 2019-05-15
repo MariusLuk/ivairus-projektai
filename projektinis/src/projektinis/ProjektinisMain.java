@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class Projektinis {
+public class ProjektinisMain {
     static Scanner scanner = new Scanner(System.in);
 
     public static void rodykUzsakymuAtaskaita() {
@@ -34,7 +34,7 @@ public class Projektinis {
                                 + apdorotiReiksme(s, rs.getString("uzsakymoDataLaikas"))
                 );
             }
-            System.out.println("_______________________________________________________________________________________________________________________________________________________________");
+            System.out.println("________________________________________________________________________________________________________________________________________________________________");
             System.out.println();
 
         } catch (SQLException e) {
@@ -47,6 +47,7 @@ public class Projektinis {
     }
 
     public static void main(String[] args) {
+        Navigacija.nuskaitykPirkejoRekvizitus();
         Navigacija.pradzia();
     }
 

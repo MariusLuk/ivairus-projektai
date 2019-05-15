@@ -74,11 +74,8 @@ public class Preke {
             System.out.println();
             Navigacija.adminMeniu2111(keiciamaPreke);
         } else {
-            // keiciamaPreke.kiekis += ivestaKiekioKorekcija;
             PiniguLikutis.keiskPiniguLikuti(-ivestaKiekioKorekcija * keiciamaPreke.didmKaina);
             Sandelis.keistiPrekesKiekiSandelioDB(keiciamaPreke.ID, ivestaKiekioKorekcija);
-
-
         }
     }
 
