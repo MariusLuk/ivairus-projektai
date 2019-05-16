@@ -25,6 +25,7 @@ public class PiniguLikutis {
     }
 
     public static void keiskPiniguLikuti(double piniguPokytis) {
+        nuskaitykPiniguLikutiDB();
         kiekis += piniguPokytis;
         PiniguLikutis.atnaujintiPiniguLikutiDB(kiekis);
 

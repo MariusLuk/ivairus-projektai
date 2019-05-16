@@ -2,15 +2,7 @@ package projektinis;
 
 import javafx.application.Application;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
-
-
 public class Navigacija {
-
 
     public static void pradzia() {
         System.out.println("Sveiki atvyke i e-parduotuve!");
@@ -149,7 +141,7 @@ public class Navigacija {
 
     public static void pirkejoMeniu121() {
         if (Krepselis.krepselioKaina <= 0) {
-            System.out.println("Uzsakymas NEGALIMAS, nes Jusu krepselis kolkas TUSCIAS!");
+            System.out.println("Uzsakymas NEGALIMAS!");
             pirkejoMeniu122();
         } else {
             Krepselis.krepselioSpausdinimasPirkejui();
@@ -161,7 +153,7 @@ public class Navigacija {
                     pirkejoMeniu12();
                     break;
                 case 1:
-                    nuskaitykPirkejoRekvizitus();
+                    pirkejoMenu1211nuskaitykPirkejoRekvizitus();
                     break;
                 default:
                     System.out.println("Nekorektiska ivestis!");
@@ -170,56 +162,32 @@ public class Navigacija {
         }
     }
 
-    public static void nuskaitykPirkejoRekvizitus() {
+    public static void pirkejoMenu1211nuskaitykPirkejoRekvizitus() {
 
         Application.launch(PirkejoDuomenuNuskaitymas.class);
 
-
-
-        System.out.println("Iveskite savo ID");
-        int pirkejoID = Nuskaitymai.teigIntSkaiciausNuskaitymas();
-        System.out.println("Iveskite savo varda ir pavarde arba imones pavadinima:");
-        String pirkejoPavadinimas = ProjektinisMain.scanner.nextLine();
-        System.out.println("Iveskite savo e-mail adresa:");
-        String pirkejoEmail = ProjektinisMain.scanner.nextLine();
-        System.out.println("Iveskite pristatymo adresa:");
-        String pirkejoAdresas = ProjektinisMain.scanner.nextLine();
-        // TODO: jei viskas ok, tai toliau:
-
-        Sandelis.krepselioPrekiuIsemimasIsSandelio();
-        uzsakymasToAtaskaita(pirkejoID, pirkejoPavadinimas, pirkejoEmail, pirkejoAdresas, Krepselis.krepselioKaina);
-        PiniguLikutis.keiskPiniguLikuti(Krepselis.krepselioKaina);
-        Krepselis.istustinkKrepseli();
-
-        System.out.println("Uzsakymas patvirtintas ir artimiausiu metu bus issiustas Jums!");
-        System.out.println("Dekojame, kad pirkote!");
-        System.out.println();
+//        System.out.println("Iveskite savo ID");
+//        int pirkejoID = Nuskaitymai.teigIntSkaiciausNuskaitymas();
+//        System.out.println("Iveskite savo varda ir pavarde arba imones pavadinima:");
+//        String pirkejoPavadinimas = ProjektinisMain.scanner.nextLine();
+//        System.out.println("Iveskite savo e-mail adresa:");
+//        String pirkejoEmail = ProjektinisMain.scanner.nextLine();
+//        System.out.println("Iveskite pristatymo adresa:");
+//        String pirkejoAdresas = ProjektinisMain.scanner.nextLine();
+//        // TODO: jei viskas ok, tai toliau:
+//
+//        Sandelis.krepselioPrekiuIsemimasIsSandelio();
+//        ikelkUzsakymaToAtaskaita(pirkejoID, pirkejoPavadinimas, pirkejoEmail, pirkejoAdresas, Krepselis.krepselioKaina);
+//        PiniguLikutis.keiskPiniguLikuti(Krepselis.krepselioKaina);
+//        Krepselis.istustinkKrepseli();
+//
+//        System.out.println("Uzsakymas patvirtintas ir artimiausiu metu bus issiustas Jums!");
+//        System.out.println("Dekojame, kad pirkote!");
+//        System.out.println();
 
         pirkejoMeniu1();
     }
 
-
-
-
-
-
-
-    public static void uzsakymasToAtaskaita(int pirkejoID, String pirkejoPavadinimas, String pirkejoEmail,
-                                            String pirkejoAdresas, double krepselioKaina) {
-        String url = "jdbc:sqlite:projektinioDuomenuBaze.db";
-        String sql = "INSERT INTO uzsakymai(pirkejoID,pirkejoPavadinimas,pirkejoEmail,pirkejoAdresas,krepselioKaina) VALUES(?,?,?,?,?)";
-
-        try (Connection conn = DriverManager.getConnection(url); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, pirkejoID);
-            pstmt.setString(2, pirkejoPavadinimas);
-            pstmt.setString(3, pirkejoEmail);
-            pstmt.setString(4, pirkejoAdresas);
-            pstmt.setDouble(5, krepselioKaina);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 
     public static void pirkejoMeniu122() {
         Krepselis.krepselioSpausdinimasPirkejui();
@@ -271,7 +239,7 @@ public class Navigacija {
 
     public static void tikrinkAdminPassword() {
         System.out.println("Iveskite savo administratoriaus prisijungimo varda:");
-        String adminVardas = ProjektinisMain.scanner.nextLine();
+        String adminVardas = Nuskaitymai.scanner.nextLine();
 
         Admin admin = new Admin(adminVardas);
         String adminPasswordFromDB = admin.getPassword();
@@ -281,7 +249,7 @@ public class Navigacija {
 
         while (!adminPasswordFromDB.equals(ivestasPassword) && blogoPasswordSkaitliukas < 3) {
             System.out.println("Iveskite slaptazodi, noredami prisijungti prie ADMINISTRATORIAUS MENIU:");
-            ivestasPassword = ProjektinisMain.scanner.nextLine();
+            ivestasPassword = Nuskaitymai.scanner.nextLine();
             if (!adminPasswordFromDB.equals(ivestasPassword)) {
                 blogoPasswordSkaitliukas = blogoPasswordSkaitliukas + 1;
                 System.out.println("Slaptazodis nekorektiskas!");
@@ -421,7 +389,7 @@ public class Navigacija {
     }
 
     public static void adminMeniu23() {
-        ProjektinisMain.rodykUzsakymuAtaskaita();
+        UzsakymuAtaskaita.rodykUzsakymuAtaskaita();
         System.out.println("0 - Grizti atgal");
         switch (Nuskaitymai.nuskaitymas(0)) {
             case 0:
@@ -435,12 +403,12 @@ public class Navigacija {
 
     private static void adminMeniu24keiskAdminSlaptazodi() {
         System.out.println("Iveskite savo administratoriaus prisijungimo varda:");
-        String adminVardas = ProjektinisMain.scanner.nextLine();
+        String adminVardas = Nuskaitymai.scanner.nextLine();
         Admin admin = new Admin(adminVardas);
         System.out.println("Iveskite nauja slaptazodi:");
-        String pirmasPasswordoKeitimoBandymas = ProjektinisMain.scanner.nextLine();
+        String pirmasPasswordoKeitimoBandymas = Nuskaitymai.scanner.nextLine();
         System.out.println("Pakartokite nauja slaptazodi:");
-        String antrasPasswordoKeitimoBandymas = ProjektinisMain.scanner.nextLine();
+        String antrasPasswordoKeitimoBandymas = Nuskaitymai.scanner.nextLine();
         System.out.println();
         if (pirmasPasswordoKeitimoBandymas.equals(antrasPasswordoKeitimoBandymas)) {
             admin.setPassword(antrasPasswordoKeitimoBandymas, adminVardas);

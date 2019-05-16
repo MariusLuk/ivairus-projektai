@@ -120,7 +120,6 @@ public class Sandelis {
 
             stmt.setInt(1, prekesID);
             ResultSet rs = stmt.executeQuery();
-//            System.out.println("nuskaitymas ivyko");
 
             if (rs.next()) {
                 rastaPreke.ID = rs.getInt("PrekesID");
