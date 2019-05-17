@@ -100,20 +100,20 @@
       <find>pirkejopavadinimas</find>
       <find>pirkejoID</find>
       <find>jdbc</find>
-      <find>iveskite sa</find>
-      <find>kiekis atna</find>
+      <find />
+      <find />
       <find>jusu</find>
       <find>nuskai</find>
-      <find>kiekis at</find>
+      <find />
       <find>url</find>
       <find>keistiPrekesKiekiSandelioDB</find>
-      <find>pinigu po</find>
+      <find />
       <find>krepselis</find>
       <find>pass</find>
       <find>update</find>
       <find>adminVardas</find>
       <find>Marius</find>
-      <find>uzsakymas nega</find>
+      <find />
       <find>kiekis</find>
       <find>apsilank</find>
     </findStrings>
