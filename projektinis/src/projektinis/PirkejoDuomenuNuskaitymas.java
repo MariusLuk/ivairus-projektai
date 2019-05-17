@@ -94,6 +94,14 @@ public class PirkejoDuomenuNuskaitymas extends Application {
                     Krepselis.istustinkKrepseli();
 
                     text.setText("Užsakymas patvirtintas!");
+                    labelPirkejoID.setVisible(false);
+                    textFieldPirkejoID.setVisible(false);
+                    labelPirkejoPavadinimas.setText(pirkejoPavadinimas);
+                    textFieldPirkejoPavadinimas.setVisible(false);
+                    labelPirkejoEmail.setText(pirkejoEmail);
+                    textFieldPirkejoEmail.setVisible(false);
+                    labelPirkejoAdresas.setText(pirkejoAdresas);
+                    textFieldPirkejoAdresas.setVisible(false);
                     button.setVisible(false);
                 }
             });
