@@ -15,7 +15,7 @@ public class Preke {
     public static void nuskaitykNaujaPrekeToSandelis() {
 
 //		System.out.println("0 - Grizti atgal");
-        System.out.println("Iveskite naujos prekes ID");
+        System.out.println("Iveskite naujos prekes ID:");
         int ID = Nuskaitymai.teigIntSkaiciausNuskaitymas();
 
         Preke rastaPreke = Sandelis.ieskotiSandelyjePrekesPagalID(ID);
@@ -61,7 +61,7 @@ public class Preke {
         }
     }
 
-    public static void keiskPrekesKiekiSandely(Preke keiciamaPreke) {
+    public static void keiskPrekesKiekiSandelyje(Preke keiciamaPreke) {
         System.out.println("Iveskite norima prekes kiekio korekcija (+/-)");
         int ivestaKiekioKorekcija = Nuskaitymai.kiekioIntNuskaitymas();
 

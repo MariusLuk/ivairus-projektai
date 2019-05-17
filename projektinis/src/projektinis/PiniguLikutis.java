@@ -31,14 +31,6 @@ public class PiniguLikutis {
 
     }
 
-    public static Double getKiekis() {
-        return kiekis;
-    }
-
-    public static void setKiekis(Double kiekis) {
-        atnaujintiPiniguLikutiDB(kiekis);
-    }
-
     private static void atnaujintiPiniguLikutiDB(Double kiekis) {
         String sql = "UPDATE piniguLikutis SET Likutis = ?";
 
@@ -56,5 +48,13 @@ public class PiniguLikutis {
     public static void spausdinkPiniguLikuti() {
         System.out.println("Pinigu likutis parduotuveje siuo metu: " + PiniguLikutis.nuskaitykPiniguLikutiDB() + " EUR");
         System.out.println();
+    }
+
+    public static Double getKiekis() {
+        return kiekis;
+    }
+
+    public static void setKiekis(Double kiekis) {
+        atnaujintiPiniguLikutiDB(kiekis);
     }
 }

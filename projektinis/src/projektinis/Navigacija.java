@@ -164,30 +164,10 @@ public class Navigacija {
 
     public static void pirkejoMenu1211nuskaitykPirkejoRekvizitus() {
 
-        Application.launch(PirkejoDuomenuNuskaitymas.class);
-
-//        System.out.println("Iveskite savo ID");
-//        int pirkejoID = Nuskaitymai.teigIntSkaiciausNuskaitymas();
-//        System.out.println("Iveskite savo varda ir pavarde arba imones pavadinima:");
-//        String pirkejoPavadinimas = ProjektinisMain.scanner.nextLine();
-//        System.out.println("Iveskite savo e-mail adresa:");
-//        String pirkejoEmail = ProjektinisMain.scanner.nextLine();
-//        System.out.println("Iveskite pristatymo adresa:");
-//        String pirkejoAdresas = ProjektinisMain.scanner.nextLine();
-//        // TODO: jei viskas ok, tai toliau:
-//
-//        Sandelis.krepselioPrekiuIsemimasIsSandelio();
-//        ikelkUzsakymaToAtaskaita(pirkejoID, pirkejoPavadinimas, pirkejoEmail, pirkejoAdresas, Krepselis.krepselioKaina);
-//        PiniguLikutis.keiskPiniguLikuti(Krepselis.krepselioKaina);
-//        Krepselis.istustinkKrepseli();
-//
-//        System.out.println("Uzsakymas patvirtintas ir artimiausiu metu bus issiustas Jums!");
-//        System.out.println("Dekojame, kad pirkote!");
-//        System.out.println();
+        Application.launch(UzsakymoFormavimasSuJavaFX.class);
 
         pirkejoMeniu1();
     }
-
 
     public static void pirkejoMeniu122() {
         Krepselis.krepselioSpausdinimasPirkejui();
@@ -254,8 +234,6 @@ public class Navigacija {
                 blogoPasswordSkaitliukas = blogoPasswordSkaitliukas + 1;
                 System.out.println("Slaptazodis nekorektiskas!");
                 System.out.println();
-
-                // TODO: Test from third time correct password
 
                 if (blogoPasswordSkaitliukas == 3) {
                     System.out.println(blogoPasswordSkaitliukas + " kartus ivedete nekorektiska slaptazodi!");
@@ -344,13 +322,11 @@ public class Navigacija {
     public static void adminMeniu2111(Preke keiciamaPreke) {
         Sandelis.rastosSandelioPrekesSpausdinimasAdminui(keiciamaPreke);
         PiniguLikutis.spausdinkPiniguLikuti();
-        Preke.keiskPrekesKiekiSandely(keiciamaPreke);
+        Preke.keiskPrekesKiekiSandelyje(keiciamaPreke);
         adminMeniu21();
     }
 
-    // Papildyti sandeli
     public static void adminMeniu212() {
-
         PiniguLikutis.spausdinkPiniguLikuti();
         Preke.nuskaitykNaujaPrekeToSandelis();
         adminMeniu21();
@@ -419,5 +395,4 @@ public class Navigacija {
         System.out.println();
         Navigacija.adminMeniu2();
     }
-
 }

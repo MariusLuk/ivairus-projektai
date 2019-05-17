@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class PirkejoDuomenuNuskaitymas extends Application {
+public class UzsakymoFormavimasSuJavaFX extends Application {
 
     @Override
     public void start(Stage primaryStage) {
@@ -126,6 +126,6 @@ public class PirkejoDuomenuNuskaitymas extends Application {
     }
 
     public static void launch() {
-        PirkejoDuomenuNuskaitymas.launch();
+        UzsakymoFormavimasSuJavaFX.launch();
     }
 }
