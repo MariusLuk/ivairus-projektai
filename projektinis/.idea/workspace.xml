@@ -21,7 +21,7 @@
       <file leaf-file-name="UzsakymoFormavimasSuJavaFX.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/projektinis/UzsakymoFormavimasSuJavaFX.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8">
+            <state>
               <caret line="96" column="51" selection-start-line="96" selection-start-column="51" selection-end-line="96" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -30,11 +30,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UzsakymuAtaskaita.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UzsakymuAtaskaita.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/projektinis/UzsakymuAtaskaita.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="54" selection-start-line="54" selection-end-line="54" />
+            <state relative-caret-position="423">
+              <caret line="47" column="212" selection-start-line="47" selection-start-column="212" selection-end-line="47" selection-end-column="212" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="String.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/String.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="1930" selection-start-line="1930" selection-end-line="1930" />
             </state>
           </provider>
         </entry>
@@ -51,8 +60,8 @@
       <file leaf-file-name="Preke.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/projektinis/Preke.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-93">
-              <caret line="61" column="5" lean-forward="true" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
+            <state relative-caret-position="1037">
+              <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -60,7 +69,7 @@
       <file leaf-file-name="PiniguLikutis.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/projektinis/PiniguLikutis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
+            <state relative-caret-position="935">
               <caret line="59" selection-start-line="59" selection-end-line="59" />
             </state>
           </provider>
@@ -69,7 +78,7 @@
       <file leaf-file-name="Sandelis.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/projektinis/Sandelis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
+            <state relative-caret-position="3859">
               <caret line="227" column="5" selection-start-line="227" selection-start-column="5" selection-end-line="227" selection-end-column="5" />
             </state>
           </provider>
@@ -78,17 +87,17 @@
       <file leaf-file-name="Nuskaitymai.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/projektinis/Nuskaitymai.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-722">
+            <state relative-caret-position="510">
               <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjektinisMain.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProjektinisMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/projektinis/ProjektinisMain.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -96,7 +105,7 @@
       <file leaf-file-name="Navigacija.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/projektinis/Navigacija.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3357">
+            <state relative-caret-position="2839">
               <caret line="167" selection-start-line="167" selection-end-line="167" />
             </state>
           </provider>
@@ -157,7 +166,6 @@
         <option value="$PROJECT_DIR$/src/projektinis/Pirkejas.java" />
         <option value="$PROJECT_DIR$/src/projektinis/Admin.java" />
         <option value="$PROJECT_DIR$/src/projektinis/Nuskaitymai.java" />
-        <option value="$PROJECT_DIR$/src/projektinis/UzsakymuAtaskaita.java" />
         <option value="$PROJECT_DIR$/src/test/PiniguLikutisTest.java" />
         <option value="$PROJECT_DIR$/src/test/com/company/Test/PolitePersonTest.java" />
         <option value="$PROJECT_DIR$/src/test/com/company/Test/PiniguLikutisTest.java" />
@@ -165,25 +173,28 @@
         <option value="$PROJECT_DIR$/src/test/projektinis/Test/PiniguLikutisTest.java" />
         <option value="$PROJECT_DIR$/src/projektinis/Test/PiniguLikutisTest.java" />
         <option value="$PROJECT_DIR$/src/projektinis/PirkejoDuomenuNuskaitymas.java" />
-        <option value="$PROJECT_DIR$/src/projektinis/ProjektinisMain.java" />
         <option value="$PROJECT_DIR$/src/projektinis/PiniguLikutis.java" />
         <option value="$PROJECT_DIR$/src/projektinis/Preke.java" />
         <option value="$PROJECT_DIR$/src/projektinis/Sandelis.java" />
         <option value="$PROJECT_DIR$/src/projektinis/Navigacija.java" />
+        <option value="$PROJECT_DIR$/src/projektinis/ProjektinisMain.java" />
+        <option value="$PROJECT_DIR$/src/projektinis/UzsakymuAtaskaita.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="339" />
-    <option name="y" value="461" />
-    <option name="width" value="1064" />
-    <option name="height" value="703" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1296" />
+    <option name="height" value="816" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -210,9 +221,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -328,11 +337,11 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.500625" side_tool="true" weight="0.2908623" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.499375" weight="0.3899614" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.499375" weight="0.5212355" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19625" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13875" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.12875" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -494,13 +503,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Test/KrepselisTest.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="1924" column="18" selection-start-line="1924" selection-start-column="18" selection-end-line="1924" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/Integer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="142">
@@ -555,21 +557,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/projektinis/Navigacija.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3357">
+        <state relative-caret-position="2839">
           <caret line="167" selection-start-line="167" selection-end-line="167" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/projektinis/Nuskaitymai.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-722">
+        <state relative-caret-position="510">
           <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/projektinis/PiniguLikutis.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
+        <state relative-caret-position="935">
           <caret line="59" selection-start-line="59" selection-end-line="59" />
         </state>
       </provider>
@@ -583,7 +585,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/projektinis/Sandelis.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
+        <state relative-caret-position="3859">
           <caret line="227" column="5" selection-start-line="227" selection-start-column="5" selection-end-line="227" selection-end-column="5" />
         </state>
       </provider>
@@ -597,7 +599,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/projektinis/UzsakymoFormavimasSuJavaFX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
+        <state>
           <caret line="96" column="51" selection-start-line="96" selection-start-column="51" selection-end-line="96" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -607,15 +609,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/projektinis/Preke.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-93">
-          <caret line="61" column="5" lean-forward="true" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/projektinis/UzsakymuAtaskaita.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="54" selection-start-line="54" selection-end-line="54" />
+        <state relative-caret-position="1037">
+          <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -629,7 +624,21 @@
     <entry file="file://$PROJECT_DIR$/src/projektinis/ProjektinisMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="1930" selection-start-line="1930" selection-end-line="1930" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/projektinis/UzsakymuAtaskaita.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="47" column="212" selection-start-line="47" selection-start-column="212" selection-end-line="47" selection-end-column="212" />
         </state>
       </provider>
     </entry>

@@ -24,16 +24,16 @@ public class UzsakymuAtaskaita {
     public static void rodykUzsakymuAtaskaita() {
         String url = "jdbc:sqlite:projektinioDuomenuBaze.db";
         String sql = "SELECT pirkejoID, pirkejoPavadinimas, pirkejoEmail, pirkejoAdresas, krepselioKaina, uzsakymoDataLaikas FROM uzsakymai";
-        String s = "                          ";
+        String s = "                               ";
 
 
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-            System.out.println("________________________________________________________________________________________________________________________________________________________________");
-            System.out.println("Pirkejo ID                  Pavarde arba pavadinimas    Pirkejo e-mail              Pirkejo adresas             Uzsakymo suma EUR           Uzsakymo data/laikas");
-            System.out.println("________________________________________________________________________________________________________________________________________________________________");
+            System.out.println("____________________________________________________________________________________________________________________________________________________________________________________");
+            System.out.println("Pirkejo ID                      Pavarde arba pavadinimas        Pirkejo e-mail                  Pirkejo adresas                 Uzsakymo suma EUR               Uzsakymo data/laikas");
+            System.out.println("____________________________________________________________________________________________________________________________________________________________________________________");
             while (rs.next()) {
 
                 System.out.println(
@@ -45,7 +45,7 @@ public class UzsakymuAtaskaita {
                                 + apdorotiReiksme(s, rs.getString("uzsakymoDataLaikas"))
                 );
             }
-            System.out.println("________________________________________________________________________________________________________________________________________________________________");
+            System.out.println("____________________________________________________________________________________________________________________________________________________________________________________");
             System.out.println();
 
         } catch (SQLException e) {
